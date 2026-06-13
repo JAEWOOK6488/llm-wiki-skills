@@ -9,6 +9,7 @@ Obsidian LLM Wiki 운영용 [Claude Code](https://claude.com/claude-code) 스킬
 | [`ingest`](./ingest/SKILL.md) | `raw/` 폴더의 소스(문서·아티클·논문)를 읽어 LLM Wiki로 편입 — 소스 요약 작성, 엔티티·개념 페이지 생성/갱신, MOC·index·log 갱신. 볼트의 `CLAUDE.md §6`을 실행 절차로 구체화. |
 | [`tag`](./tag/SKILL.md) | `raw/` 폴더에 쌓인 파일에 그 파일이 무엇에 관한 것인지 주제 태그를 frontmatter에 부여 — 관리 태그 레지스트리(`_tags.md`) 기반. wiki 승격·파일 이동/삭제 없이 frontmatter만 수정. 권장 순서는 tag → ingest. |
 | [`lint`](./lint/SKILL.md) | 볼트 건강검진 — broken link 자동 재연결, frontmatter 자동 보강, stale 삭제 결정 요청, orphan 연결 제안. `raw/`는 수정하지 않고, 모든 자동수정은 리포트 "수정됨"에 기록. |
+| [`rollup`](./rollup/SKILL.md) | 현재 세션(또는 오늘 전체)의 작업을 증류해 `raw/`에 회고 노트로 스테이징(v2 crystallization). 새 raw 파일만 생성, 민감정보 필터, ingest는 별도. |
 
 ## 설치 (전역 스킬로 등록)
 
@@ -20,6 +21,7 @@ git clone git@github.com:<USER>/llm-wiki-skills.git ~/Project/llm-wiki-skills
 ln -s ~/Project/llm-wiki-skills/ingest ~/.claude/skills/ingest
 ln -s ~/Project/llm-wiki-skills/tag    ~/.claude/skills/tag
 ln -s ~/Project/llm-wiki-skills/lint   ~/.claude/skills/lint
+ln -s ~/Project/llm-wiki-skills/rollup ~/.claude/skills/rollup
 ```
 
 이 레포가 단일 진실 원천이다. `~/.claude/skills/ingest`는 여기를 가리키는 링크이므로,
@@ -33,6 +35,8 @@ llm-wiki-skills/
 │   └── SKILL.md   # frontmatter(name, description) + 절차
 ├── tag/
 │   └── SKILL.md
-└── lint/
+├── lint/
+│   └── SKILL.md
+└── rollup/
     └── SKILL.md
 ```
